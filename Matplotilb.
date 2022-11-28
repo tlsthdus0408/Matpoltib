@@ -1,0 +1,1029 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "id": "777be679",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "id": "579b7da4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df=pd.read_excel(\"./시도별 전출입 인구수.xlsx\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 68,
+   "id": "55fc1f4e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>전출지별</th>\n",
+       "      <th>전입지별</th>\n",
+       "      <th>1970</th>\n",
+       "      <th>1971</th>\n",
+       "      <th>1972</th>\n",
+       "      <th>1973</th>\n",
+       "      <th>1974</th>\n",
+       "      <th>1975</th>\n",
+       "      <th>1976</th>\n",
+       "      <th>1977</th>\n",
+       "      <th>...</th>\n",
+       "      <th>2008</th>\n",
+       "      <th>2009</th>\n",
+       "      <th>2010</th>\n",
+       "      <th>2011</th>\n",
+       "      <th>2012</th>\n",
+       "      <th>2013</th>\n",
+       "      <th>2014</th>\n",
+       "      <th>2015</th>\n",
+       "      <th>2016</th>\n",
+       "      <th>2017</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>전출지별</td>\n",
+       "      <td>전입지별</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>...</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "      <td>이동자수 (명)</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>전국</td>\n",
+       "      <td>전국</td>\n",
+       "      <td>4046536</td>\n",
+       "      <td>4210164</td>\n",
+       "      <td>3687938</td>\n",
+       "      <td>4860418</td>\n",
+       "      <td>5297969</td>\n",
+       "      <td>9011440</td>\n",
+       "      <td>6773250</td>\n",
+       "      <td>7397623</td>\n",
+       "      <td>...</td>\n",
+       "      <td>8808256</td>\n",
+       "      <td>8487275</td>\n",
+       "      <td>8226594</td>\n",
+       "      <td>8127195</td>\n",
+       "      <td>7506691</td>\n",
+       "      <td>7411784</td>\n",
+       "      <td>7629098</td>\n",
+       "      <td>7755286</td>\n",
+       "      <td>7378430</td>\n",
+       "      <td>7154226</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>서울특별시</td>\n",
+       "      <td>1742813</td>\n",
+       "      <td>1671705</td>\n",
+       "      <td>1349333</td>\n",
+       "      <td>1831858</td>\n",
+       "      <td>2050392</td>\n",
+       "      <td>3396662</td>\n",
+       "      <td>2756510</td>\n",
+       "      <td>2893403</td>\n",
+       "      <td>...</td>\n",
+       "      <td>2025358</td>\n",
+       "      <td>1873188</td>\n",
+       "      <td>1733015</td>\n",
+       "      <td>1721748</td>\n",
+       "      <td>1555281</td>\n",
+       "      <td>1520090</td>\n",
+       "      <td>1573594</td>\n",
+       "      <td>1589431</td>\n",
+       "      <td>1515602</td>\n",
+       "      <td>1472937</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>부산광역시</td>\n",
+       "      <td>448577</td>\n",
+       "      <td>389797</td>\n",
+       "      <td>362202</td>\n",
+       "      <td>482061</td>\n",
+       "      <td>680984</td>\n",
+       "      <td>805979</td>\n",
+       "      <td>724664</td>\n",
+       "      <td>785117</td>\n",
+       "      <td>...</td>\n",
+       "      <td>514502</td>\n",
+       "      <td>519310</td>\n",
+       "      <td>519334</td>\n",
+       "      <td>508043</td>\n",
+       "      <td>461042</td>\n",
+       "      <td>478451</td>\n",
+       "      <td>485710</td>\n",
+       "      <td>507031</td>\n",
+       "      <td>459015</td>\n",
+       "      <td>439073</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>대구광역시</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>...</td>\n",
+       "      <td>409938</td>\n",
+       "      <td>398626</td>\n",
+       "      <td>370817</td>\n",
+       "      <td>370563</td>\n",
+       "      <td>348642</td>\n",
+       "      <td>351873</td>\n",
+       "      <td>350213</td>\n",
+       "      <td>351424</td>\n",
+       "      <td>328228</td>\n",
+       "      <td>321182</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>5 rows × 50 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   전출지별   전입지별      1970      1971      1972      1973      1974      1975  \\\n",
+       "0  전출지별   전입지별  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)   \n",
+       "1    전국     전국   4046536   4210164   3687938   4860418   5297969   9011440   \n",
+       "2   NaN  서울특별시   1742813   1671705   1349333   1831858   2050392   3396662   \n",
+       "3   NaN  부산광역시    448577    389797    362202    482061    680984    805979   \n",
+       "4   NaN  대구광역시         -         -         -         -         -         -   \n",
+       "\n",
+       "       1976      1977  ...      2008      2009      2010      2011      2012  \\\n",
+       "0  이동자수 (명)  이동자수 (명)  ...  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)   \n",
+       "1   6773250   7397623  ...   8808256   8487275   8226594   8127195   7506691   \n",
+       "2   2756510   2893403  ...   2025358   1873188   1733015   1721748   1555281   \n",
+       "3    724664    785117  ...    514502    519310    519334    508043    461042   \n",
+       "4         -         -  ...    409938    398626    370817    370563    348642   \n",
+       "\n",
+       "       2013      2014      2015      2016      2017  \n",
+       "0  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)  이동자수 (명)  \n",
+       "1   7411784   7629098   7755286   7378430   7154226  \n",
+       "2   1520090   1573594   1589431   1515602   1472937  \n",
+       "3    478451    485710    507031    459015    439073  \n",
+       "4    351873    350213    351424    328228    321182  \n",
+       "\n",
+       "[5 rows x 50 columns]"
+      ]
+     },
+     "execution_count": 68,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "id": "0245a0f7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>전출지별</th>\n",
+       "      <th>전입지별</th>\n",
+       "      <th>1970</th>\n",
+       "      <th>1971</th>\n",
+       "      <th>1972</th>\n",
+       "      <th>1973</th>\n",
+       "      <th>1974</th>\n",
+       "      <th>1975</th>\n",
+       "      <th>1976</th>\n",
+       "      <th>1977</th>\n",
+       "      <th>...</th>\n",
+       "      <th>2008</th>\n",
+       "      <th>2009</th>\n",
+       "      <th>2010</th>\n",
+       "      <th>2011</th>\n",
+       "      <th>2012</th>\n",
+       "      <th>2013</th>\n",
+       "      <th>2014</th>\n",
+       "      <th>2015</th>\n",
+       "      <th>2016</th>\n",
+       "      <th>2017</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>320</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>전라북도</td>\n",
+       "      <td>139</td>\n",
+       "      <td>202</td>\n",
+       "      <td>141</td>\n",
+       "      <td>210</td>\n",
+       "      <td>219</td>\n",
+       "      <td>415</td>\n",
+       "      <td>392</td>\n",
+       "      <td>408</td>\n",
+       "      <td>...</td>\n",
+       "      <td>668</td>\n",
+       "      <td>579</td>\n",
+       "      <td>672</td>\n",
+       "      <td>561</td>\n",
+       "      <td>551</td>\n",
+       "      <td>516</td>\n",
+       "      <td>609</td>\n",
+       "      <td>683</td>\n",
+       "      <td>733</td>\n",
+       "      <td>768</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>321</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>전라남도</td>\n",
+       "      <td>631</td>\n",
+       "      <td>965</td>\n",
+       "      <td>857</td>\n",
+       "      <td>952</td>\n",
+       "      <td>1133</td>\n",
+       "      <td>2808</td>\n",
+       "      <td>2608</td>\n",
+       "      <td>2652</td>\n",
+       "      <td>...</td>\n",
+       "      <td>1143</td>\n",
+       "      <td>1123</td>\n",
+       "      <td>1002</td>\n",
+       "      <td>1026</td>\n",
+       "      <td>966</td>\n",
+       "      <td>1001</td>\n",
+       "      <td>928</td>\n",
+       "      <td>1062</td>\n",
+       "      <td>1127</td>\n",
+       "      <td>1102</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>322</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>경상북도</td>\n",
+       "      <td>374</td>\n",
+       "      <td>619</td>\n",
+       "      <td>468</td>\n",
+       "      <td>576</td>\n",
+       "      <td>625</td>\n",
+       "      <td>1123</td>\n",
+       "      <td>1141</td>\n",
+       "      <td>1004</td>\n",
+       "      <td>...</td>\n",
+       "      <td>761</td>\n",
+       "      <td>704</td>\n",
+       "      <td>738</td>\n",
+       "      <td>756</td>\n",
+       "      <td>699</td>\n",
+       "      <td>781</td>\n",
+       "      <td>728</td>\n",
+       "      <td>903</td>\n",
+       "      <td>931</td>\n",
+       "      <td>994</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>323</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>경상남도</td>\n",
+       "      <td>474</td>\n",
+       "      <td>479</td>\n",
+       "      <td>440</td>\n",
+       "      <td>571</td>\n",
+       "      <td>1208</td>\n",
+       "      <td>1517</td>\n",
+       "      <td>863</td>\n",
+       "      <td>1122</td>\n",
+       "      <td>...</td>\n",
+       "      <td>1517</td>\n",
+       "      <td>1474</td>\n",
+       "      <td>1324</td>\n",
+       "      <td>1367</td>\n",
+       "      <td>1227</td>\n",
+       "      <td>1278</td>\n",
+       "      <td>1223</td>\n",
+       "      <td>1500</td>\n",
+       "      <td>1448</td>\n",
+       "      <td>1501</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>324</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>제주특별자치도</td>\n",
+       "      <td>9290</td>\n",
+       "      <td>12427</td>\n",
+       "      <td>12210</td>\n",
+       "      <td>16158</td>\n",
+       "      <td>19580</td>\n",
+       "      <td>34221</td>\n",
+       "      <td>23291</td>\n",
+       "      <td>31028</td>\n",
+       "      <td>...</td>\n",
+       "      <td>59564</td>\n",
+       "      <td>55673</td>\n",
+       "      <td>55507</td>\n",
+       "      <td>59846</td>\n",
+       "      <td>54280</td>\n",
+       "      <td>60607</td>\n",
+       "      <td>59673</td>\n",
+       "      <td>59036</td>\n",
+       "      <td>66444</td>\n",
+       "      <td>63275</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>5 rows × 50 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    전출지별     전입지별  1970   1971   1972   1973   1974   1975   1976   1977  ...  \\\n",
+       "320  NaN     전라북도   139    202    141    210    219    415    392    408  ...   \n",
+       "321  NaN     전라남도   631    965    857    952   1133   2808   2608   2652  ...   \n",
+       "322  NaN     경상북도   374    619    468    576    625   1123   1141   1004  ...   \n",
+       "323  NaN     경상남도   474    479    440    571   1208   1517    863   1122  ...   \n",
+       "324  NaN  제주특별자치도  9290  12427  12210  16158  19580  34221  23291  31028  ...   \n",
+       "\n",
+       "      2008   2009   2010   2011   2012   2013   2014   2015   2016   2017  \n",
+       "320    668    579    672    561    551    516    609    683    733    768  \n",
+       "321   1143   1123   1002   1026    966   1001    928   1062   1127   1102  \n",
+       "322    761    704    738    756    699    781    728    903    931    994  \n",
+       "323   1517   1474   1324   1367   1227   1278   1223   1500   1448   1501  \n",
+       "324  59564  55673  55507  59846  54280  60607  59673  59036  66444  63275  \n",
+       "\n",
+       "[5 rows x 50 columns]"
+      ]
+     },
+     "execution_count": 69,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "id": "9428dc0c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(325, 50)"
+      ]
+     },
+     "execution_count": 70,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "id": "ade88ae5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>전출지별</th>\n",
+       "      <th>전입지별</th>\n",
+       "      <th>1970</th>\n",
+       "      <th>1971</th>\n",
+       "      <th>1972</th>\n",
+       "      <th>1973</th>\n",
+       "      <th>1974</th>\n",
+       "      <th>1975</th>\n",
+       "      <th>1976</th>\n",
+       "      <th>1977</th>\n",
+       "      <th>...</th>\n",
+       "      <th>2008</th>\n",
+       "      <th>2009</th>\n",
+       "      <th>2010</th>\n",
+       "      <th>2011</th>\n",
+       "      <th>2012</th>\n",
+       "      <th>2013</th>\n",
+       "      <th>2014</th>\n",
+       "      <th>2015</th>\n",
+       "      <th>2016</th>\n",
+       "      <th>2017</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>19</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>...</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "      <td>325</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>unique</th>\n",
+       "      <td>19</td>\n",
+       "      <td>19</td>\n",
+       "      <td>146</td>\n",
+       "      <td>146</td>\n",
+       "      <td>146</td>\n",
+       "      <td>146</td>\n",
+       "      <td>145</td>\n",
+       "      <td>146</td>\n",
+       "      <td>146</td>\n",
+       "      <td>146</td>\n",
+       "      <td>...</td>\n",
+       "      <td>289</td>\n",
+       "      <td>289</td>\n",
+       "      <td>289</td>\n",
+       "      <td>291</td>\n",
+       "      <td>323</td>\n",
+       "      <td>320</td>\n",
+       "      <td>321</td>\n",
+       "      <td>324</td>\n",
+       "      <td>322</td>\n",
+       "      <td>323</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>top</th>\n",
+       "      <td>전출지별</td>\n",
+       "      <td>세종특별자치시</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>...</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>-</td>\n",
+       "      <td>1489</td>\n",
+       "      <td>1939</td>\n",
+       "      <td>2026</td>\n",
+       "      <td>1468</td>\n",
+       "      <td>4303</td>\n",
+       "      <td>947</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>freq</th>\n",
+       "      <td>1</td>\n",
+       "      <td>18</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>180</td>\n",
+       "      <td>...</td>\n",
+       "      <td>35</td>\n",
+       "      <td>35</td>\n",
+       "      <td>35</td>\n",
+       "      <td>35</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>4 rows × 50 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        전출지별     전입지별 1970 1971 1972 1973 1974 1975 1976 1977  ... 2008 2009  \\\n",
+       "count     19      325  325  325  325  325  325  325  325  325  ...  325  325   \n",
+       "unique    19       19  146  146  146  146  145  146  146  146  ...  289  289   \n",
+       "top     전출지별  세종특별자치시    -    -    -    -    -    -    -    -  ...    -    -   \n",
+       "freq       1       18  180  180  180  180  180  180  180  180  ...   35   35   \n",
+       "\n",
+       "       2010 2011  2012  2013  2014  2015  2016 2017  \n",
+       "count   325  325   325   325   325   325   325  325  \n",
+       "unique  289  291   323   320   321   324   322  323  \n",
+       "top       -    -  1489  1939  2026  1468  4303  947  \n",
+       "freq     35   35     2     2     2     2     2    2  \n",
+       "\n",
+       "[4 rows x 50 columns]"
+      ]
+     },
+     "execution_count": 71,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "id": "bcb1f739",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = df.fillna(method='ffill')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "id": "2a54ae48",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mask = (df['전출지별'] == '서울특별시') & (df['전입지별'] != '서울특별시') \n",
+    "df_seoul = df[mask]\n",
+    "df_seoul = df_seoul.drop(['전출지별'], axis=1)\n",
+    "df_seoul.rename({'전입지별':'전입지'}, axis=1, inplace=True)\n",
+    "df_seoul.set_index('전입지', inplace=True)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "id": "a127d8bc",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1970    130149\n",
+       "1971    150313\n",
+       "1972     93333\n",
+       "1973    143234\n",
+       "1974    149045\n",
+       "1975    253705\n",
+       "1976    202276\n",
+       "1977    207722\n",
+       "1978    237684\n",
+       "1979    278411\n",
+       "1980    297539\n",
+       "1981    252073\n",
+       "1982    320174\n",
+       "1983    400875\n",
+       "1984    352238\n",
+       "1985    390265\n",
+       "1986    412535\n",
+       "1987    405220\n",
+       "1988    415174\n",
+       "1989    412933\n",
+       "1990    473889\n",
+       "1991    384714\n",
+       "1992    428344\n",
+       "1993    502584\n",
+       "1994    542204\n",
+       "1995    599411\n",
+       "1996    520566\n",
+       "1997    495454\n",
+       "1998    407050\n",
+       "1999    471841\n",
+       "2000    435573\n",
+       "2001    499575\n",
+       "2002    516765\n",
+       "2003    457656\n",
+       "2004    400206\n",
+       "2005    414621\n",
+       "2006    449632\n",
+       "2007    431637\n",
+       "2008    412408\n",
+       "2009    398282\n",
+       "2010    410735\n",
+       "2011    373771\n",
+       "2012    354135\n",
+       "2013    340801\n",
+       "2014    332785\n",
+       "2015    359337\n",
+       "2016    370760\n",
+       "2017    342433\n",
+       "Name: 경기도, dtype: object"
+      ]
+     },
+     "execution_count": 83,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sr_one = df_seoul.loc['경기도']\n",
+    "sr_one"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "id": "de96b767",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[<matplotlib.lines.Line2D at 0x21af3433940>]"
+      ]
+     },
+     "execution_count": 84,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.plot(sr_one,sr_one.values)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 85,
+   "id": "74484039",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[<matplotlib.lines.Line2D at 0x21af34a9190>]"
+      ]
+     },
+     "execution_count": 85,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.plot(sr_one.index, sr_one.values)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "id": "49b07ec5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['C:\\\\Windows\\\\Fonts\\\\Sitka.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCSCHBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\comicz.ttf', 'C:\\\\Windows\\\\Fonts\\\\segoeuisl.ttf', 'C:\\\\Windows\\\\Fonts\\\\NIAGENG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\trebucbi.ttf', 'C:\\\\Windows\\\\Fonts\\\\timesbi.ttf', 'C:\\\\Windows\\\\Fonts\\\\Gabriola.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeuisl.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCSCHI.TTF', 'C:\\\\Windows\\\\Fonts\\\\SCHLBKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HTOWERTI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENOCRB10.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_CI.TTF', 'C:\\\\Windows\\\\Fonts\\\\LATINWD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYNAMM.TTF', 'C:\\\\Windows\\\\Fonts\\\\Gaesung.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YTTE08.TTF', 'C:\\\\Windows\\\\Fonts\\\\calibri.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANSomaB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguisb.ttf', 'C:\\\\Windows\\\\Fonts\\\\courbi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LSANSD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOTHICI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANDotumB.ttf', 'C:\\\\Windows\\\\Fonts\\\\BRADHITC.TTF', 'C:\\\\Windows\\\\Fonts\\\\LBRITEDI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LHANDW.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANCooljazzM.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\FELIXTI.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguihis.ttf', 'C:\\\\Windows\\\\Fonts\\\\trebuc.ttf', 'C:\\\\Windows\\\\Fonts\\\\LSANSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENOCRB10.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILC____.TTF', 'C:\\\\Windows\\\\Fonts\\\\calibrib.ttf', 'C:\\\\Windows\\\\Fonts\\\\GARAIT.TTF', 'C:\\\\Windows\\\\Fonts\\\\LTYPEO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSaleM.ttf', 'C:\\\\Windows\\\\Fonts\\\\FORTE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Candarab.ttf', 'C:\\\\Windows\\\\Fonts\\\\gadugib.ttf', 'C:\\\\Windows\\\\Fonts\\\\BOD_BI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENSW721L.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGDOS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MATURASC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\SCHLBKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YNCH05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2GSRB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCK.TTF', 'C:\\\\Windows\\\\Fonts\\\\ntailu.ttf', 'C:\\\\Windows\\\\Fonts\\\\PLAYBILL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LTYPEBO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GARABD.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguili.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LeelaUIb.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBODBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2GSRB.TTF', 'C:\\\\Windows\\\\Fonts\\\\PRISTINA.TTF', 'C:\\\\Windows\\\\Fonts\\\\TCCEB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YBUU02.TTF', 'C:\\\\Windows\\\\Fonts\\\\CASTELAR.TTF', 'C:\\\\Windows\\\\Fonts\\\\BROADW.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYHWPEQ.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\cambriai.ttf', 'C:\\\\Windows\\\\Fonts\\\\CALIFR.TTF', 'C:\\\\Windows\\\\Fonts\\\\SitkaI.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYheadM.ttf', 'C:\\\\Windows\\\\Fonts\\\\tahomabd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CHILLER.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoepr.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\GOTHICB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\msjhbd.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ENITCNBK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\mingliub.ttc', 'C:\\\\Windows\\\\Fonts\\\\CHILLER.TTF', 'C:\\\\Windows\\\\Fonts\\\\ahn_m.ttf', 'C:\\\\Windows\\\\Fonts\\\\ITCBLKAD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LBRITEDI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOUDOS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NirmalaS.ttf', 'C:\\\\Windows\\\\Fonts\\\\RAGE.TTF', 'C:\\\\Windows\\\\Fonts\\\\ahn_b.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYDNKM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YDOO08.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMFMMUEX.TTC', 'C:\\\\Windows\\\\Fonts\\\\BOD_PSTC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ahn_b.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CURLZ___.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYTBRB.TTF', 'C:\\\\Windows\\\\Fonts\\\\CENSCBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\msyh.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\BELL.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOOKOSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ariali.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\NGULIM.TTF', 'C:\\\\Windows\\\\Fonts\\\\VLADIMIR.TTF', 'C:\\\\Windows\\\\Fonts\\\\constanz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CENTAUR.TTF', 'C:\\\\Windows\\\\Fonts\\\\calibriz.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYDNKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CALISTBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYTBRB.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARIALNB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeui.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LBRITE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LATINWD.TTF', 'C:\\\\Windows\\\\Fonts\\\\mingliub.ttc', 'C:\\\\Windows\\\\Fonts\\\\SNAP____.TTF', 'C:\\\\Windows\\\\Fonts\\\\comicbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\ROCKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANDotumExt.ttf', 'C:\\\\Windows\\\\Fonts\\\\NirmalaS.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\PRISTINA.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGARMI.TTF', 'C:\\\\Windows\\\\Fonts\\\\MH.TTF', 'C:\\\\Windows\\\\Fonts\\\\consola.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Candaral.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_CI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRADMIT.TTF', 'C:\\\\Windows\\\\Fonts\\\\GILI____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSolM.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LBRITED.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LSANS.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguibl.ttf', 'C:\\\\Windows\\\\Fonts\\\\GOTHIC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Candarai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENHOBO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\RAVIE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBRUSH.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANBatangExt.ttf', 'C:\\\\Windows\\\\Fonts\\\\HMFMPYUN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILI____.TTF', 'C:\\\\Windows\\\\Fonts\\\\trebucit.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LeelawUI.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\COPRGTB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2PORM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\REFSPCL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HARNGTON.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILBI___.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKBA.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGARMBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguibli.ttf', 'C:\\\\Windows\\\\Fonts\\\\WINGDNG2.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguisb.ttf', 'C:\\\\Windows\\\\Fonts\\\\CENTURY.TTF', 'C:\\\\Windows\\\\Fonts\\\\YuGothB.ttc', 'C:\\\\Windows\\\\Fonts\\\\OLDENGL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HATTEN.TTF', 'C:\\\\Windows\\\\Fonts\\\\GOTHICB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENS721LI.TTF', 'C:\\\\Windows\\\\Fonts\\\\NirmalaB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\PER_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\MN.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANYheadM.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\msyhl.ttc', 'C:\\\\Windows\\\\Fonts\\\\GILBI___.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguisym.ttf', 'C:\\\\Windows\\\\Fonts\\\\LSANSDI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\RAGE.TTF', 'C:\\\\Windows\\\\Fonts\\\\YSHN05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2PORL.TTF', 'C:\\\\Windows\\\\Fonts\\\\timesbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCOBK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\msjh.ttc', 'C:\\\\Windows\\\\Fonts\\\\ebrima.ttf', 'C:\\\\Windows\\\\Fonts\\\\ntailub.ttf', 'C:\\\\Windows\\\\Fonts\\\\MSUIGHUR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LFAX.TTF', 'C:\\\\Windows\\\\Fonts\\\\palai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YGGE05.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYWULM.TTF', 'C:\\\\Windows\\\\Fonts\\\\VINERITC.TTF', 'C:\\\\Windows\\\\Fonts\\\\constani.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ALGER.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMOLD.TTF', 'C:\\\\Windows\\\\Fonts\\\\verdanab.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MTCORSVA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\calibrii.ttf', 'C:\\\\Windows\\\\Fonts\\\\Candaral.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENORBITB.TTF', 'C:\\\\Windows\\\\Fonts\\\\constan.ttf', 'C:\\\\Windows\\\\Fonts\\\\MATURASC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYKANB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYSUPM.TTF', 'C:\\\\Windows\\\\Fonts\\\\YNCH05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYMPRL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Art.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Candara.ttf', 'C:\\\\Windows\\\\Fonts\\\\CENTAUR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\constanb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMRHD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GLSNECB.TTF', 'C:\\\\Windows\\\\Fonts\\\\msyi.ttf', 'C:\\\\Windows\\\\Fonts\\\\simsunb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeuil.ttf', 'C:\\\\Windows\\\\Fonts\\\\PERTILI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ROCCB___.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GARA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YSHN05.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENPKAV.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FZSong_Super.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSolB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\GIGI.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoeui.ttf', 'C:\\\\Windows\\\\Fonts\\\\mvboli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBASKVL.TTF', 'C:\\\\Windows\\\\Fonts\\\\GOUDOSB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BERNHC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Gabriola.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\msyh.ttc', 'C:\\\\Windows\\\\Fonts\\\\GOUDOS.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENITCNBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\RAVIE.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMMAG.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANCooljazzL.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ANTQUAB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYGO240.ttf', 'C:\\\\Windows\\\\Fonts\\\\georgia.ttf', 'C:\\\\Windows\\\\Fonts\\\\H2GTRM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMFMOLD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PERI____.TTF', 'C:\\\\Windows\\\\Fonts\\\\bahnschrift.ttf', 'C:\\\\Windows\\\\Fonts\\\\malgunbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\SCHLBKBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeuiz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\consolaz.ttf', 'C:\\\\Windows\\\\Fonts\\\\REFSAN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\AGENCYR.TTF', 'C:\\\\Windows\\\\Fonts\\\\BRLNSDB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BELLI.TTF', 'C:\\\\Windows\\\\Fonts\\\\CALIST.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2MJRE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\javatext.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\GIL_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\GILLUBCD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HTOWERT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NirmalaB.ttf', 'C:\\\\Windows\\\\Fonts\\\\LBRITE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\OLDENGL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoesc.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeuib.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\sylfaen.ttf', 'C:\\\\Windows\\\\Fonts\\\\WINGDNG3.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\webdings.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CALISTI.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYKANM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MTEXTRA.TTF', 'C:\\\\Windows\\\\Fonts\\\\gadugi.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANSolM.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HYMJRE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENSTEN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ARIALNB.TTF', 'C:\\\\Windows\\\\Fonts\\\\MJ.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ELEPHNTI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRAHVIT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBODBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\GARA.TTF', 'C:\\\\Windows\\\\Fonts\\\\VIVALDII.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ebrima.ttf', 'C:\\\\Windows\\\\Fonts\\\\NanumGothic.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGARMB.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYKANB.TTF', 'C:\\\\Windows\\\\Fonts\\\\PAPYRUS.TTF', 'C:\\\\Windows\\\\Fonts\\\\monbaiti.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMAMI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\STENCIL.TTF', 'C:\\\\Windows\\\\Fonts\\\\Candarab.ttf', 'C:\\\\Windows\\\\Fonts\\\\corbelb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ahn_m.ttf', 'C:\\\\Windows\\\\Fonts\\\\YuGothL.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGDOSB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_I.TTF', 'C:\\\\Windows\\\\Fonts\\\\FRADM.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKBS.TTF', 'C:\\\\Windows\\\\Fonts\\\\LTYPEBO.TTF', 'C:\\\\Windows\\\\Fonts\\\\javatext.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCSCHB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYGO230.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HYHWPEQ.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoeuib.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\SCHLBKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MSUIGHUB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\SCRIPTBL.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYBDAL.TTF', 'C:\\\\Windows\\\\Fonts\\\\framdit.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\monbaiti.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MSUIGHUR.TTF', 'C:\\\\Windows\\\\Fonts\\\\msyhl.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGARM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Candarali.ttf', 'C:\\\\Windows\\\\Fonts\\\\ROCKBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRUSHSCI.TTF', 'C:\\\\Windows\\\\Fonts\\\\JOKERMAN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CASTELAR.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2MKPB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeprb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Sitka.ttc', 'C:\\\\Windows\\\\Fonts\\\\BOOKOSB.TTF', 'C:\\\\Windows\\\\Fonts\\\\GIL_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\LSANS.TTF', 'C:\\\\Windows\\\\Fonts\\\\batang.ttc', 'C:\\\\Windows\\\\Fonts\\\\H2MJSM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Gaesung.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\IMPRISHA.TTF', 'C:\\\\Windows\\\\Fonts\\\\LFAXDI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENCOBKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\verdana.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANDotumExt.ttf', 'C:\\\\Windows\\\\Fonts\\\\msgothic.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCKBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARIALNBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_R.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\marlett.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENGDOSI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCSCHB.TTF', 'C:\\\\Windows\\\\Fonts\\\\TCCM____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\georgia.ttf', 'C:\\\\Windows\\\\Fonts\\\\ERASBD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\constanz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\malgunbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\TCB_____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\constan.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYNAML.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YBLO05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\gulim.ttc', 'C:\\\\Windows\\\\Fonts\\\\LeelawUI.ttf', 'C:\\\\Windows\\\\Fonts\\\\FELIXTI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\corbelli.ttf', 'C:\\\\Windows\\\\Fonts\\\\lucon.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENDOMCA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LSANSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYNAMB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NanumGothicBold.ttf', 'C:\\\\Windows\\\\Fonts\\\\YGGE05.TTF', 'C:\\\\Windows\\\\Fonts\\\\GILSANUB.TTF', 'C:\\\\Windows\\\\Fonts\\\\LTYPE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRITANIC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\constani.ttf', 'C:\\\\Windows\\\\Fonts\\\\Inkfree.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\FRADM.TTF', 'C:\\\\Windows\\\\Fonts\\\\MAIAN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYPORM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\tahoma.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\bahnschrift.ttf', 'C:\\\\Windows\\\\Fonts\\\\gulim.ttc', 'C:\\\\Windows\\\\Fonts\\\\calibrili.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\georgiaz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\mmrtext.ttf', 'C:\\\\Windows\\\\Fonts\\\\GILB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\framd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\corbelb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Sol.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YMAE07.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YBLA05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMG.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENLIBRTY.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANSomaM.ttf', 'C:\\\\Windows\\\\Fonts\\\\PARCHM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segmdl2.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YuGothB.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\cambriab.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\gadugib.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENLIBRTY.TTF', 'C:\\\\Windows\\\\Fonts\\\\BSSYM7.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoescb.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANBatang.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\malgun.ttf', 'C:\\\\Windows\\\\Fonts\\\\BOOKOS.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_CBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\Candara.ttf', 'C:\\\\Windows\\\\Fonts\\\\ERASDEMI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LFAXD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Along.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ERASMD.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYMPRL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\corbell.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\NIAGENG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\INFROMAN.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENBODBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\SitkaB.ttc', 'C:\\\\Windows\\\\Fonts\\\\PERTIBD.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2GTRE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ahn_l.ttf', 'C:\\\\Windows\\\\Fonts\\\\H2SA1M.TTF', 'C:\\\\Windows\\\\Fonts\\\\MTEXTRA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBODBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2MJRE.TTF', 'C:\\\\Windows\\\\Fonts\\\\COLONNA.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_CB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ARLRDBD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGARMI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANCooljazzM.ttf', 'C:\\\\Windows\\\\Fonts\\\\JUICE___.TTF', 'C:\\\\Windows\\\\Fonts\\\\segmdl2.ttf', 'C:\\\\Windows\\\\Fonts\\\\ITCEDSCR.TTF', 'C:\\\\Windows\\\\Fonts\\\\OUTLOOK.TTF', 'C:\\\\Windows\\\\Fonts\\\\MOD20.TTF', 'C:\\\\Windows\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7fBOLD.TTF', 'C:\\\\Windows\\\\Fonts\\\\ONYX.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YuGothM.ttc', 'C:\\\\Windows\\\\Fonts\\\\STENCIL.TTF', 'C:\\\\Windows\\\\Fonts\\\\GOTHICI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\verdanab.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCSCHBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGDOSB.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENDOMCA.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANDotum.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\OUTLOOK.TTF', 'C:\\\\Windows\\\\Fonts\\\\YINJ05.TTF', 'C:\\\\Windows\\\\Fonts\\\\YDUG05.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANBaekB.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANSaleM.ttf', 'C:\\\\Windows\\\\Fonts\\\\TCMI____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ELEPHNT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCSCH.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MAIAN.TTF', 'C:\\\\Windows\\\\Fonts\\\\HTOWERT.TTF', 'C:\\\\Windows\\\\Fonts\\\\Easop.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BSSYM7.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ariali.ttf', 'C:\\\\Windows\\\\Fonts\\\\himalaya.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ITCEDSCR.TTF', 'C:\\\\Windows\\\\Fonts\\\\MP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LSANSDI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\impact.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYGO250.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\msyi.ttf', 'C:\\\\Windows\\\\Fonts\\\\seguisym.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOOKOSB.TTF', 'C:\\\\Windows\\\\Fonts\\\\BELLI.TTF', 'C:\\\\Windows\\\\Fonts\\\\FZSong_Super.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BROADW.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANBaekM.ttf', 'C:\\\\Windows\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7fEXTRABOLD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\consolai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\H2GPRM.TTF', 'C:\\\\Windows\\\\Fonts\\\\REFSPCL.TTF', 'C:\\\\Windows\\\\Fonts\\\\CALISTBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\arialbi.ttf', 'C:\\\\Windows\\\\Fonts\\\\YGBI08.TTF', 'C:\\\\Windows\\\\Fonts\\\\pala.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENHOBO.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMOLD.TTF', 'C:\\\\Windows\\\\Fonts\\\\CURLZ___.TTF', 'C:\\\\Windows\\\\Fonts\\\\NIAGSOL.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARIALNI.TTF', 'C:\\\\Windows\\\\Fonts\\\\malgun.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYSUPB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\JOKERMAN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\POORICH.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\SHOWG.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYBDAM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BAUHS93.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\mvboli.ttf', 'C:\\\\Windows\\\\Fonts\\\\seguisbi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKBA.TTF', 'C:\\\\Windows\\\\Fonts\\\\SCRIPTBL.TTF', 'C:\\\\Windows\\\\Fonts\\\\BASKVILL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\VIVALDII.TTF', 'C:\\\\Windows\\\\Fonts\\\\CALISTI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGDOS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRABK.TTF', 'C:\\\\Windows\\\\Fonts\\\\cour.ttf', 'C:\\\\Windows\\\\Fonts\\\\TCB_____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYWULB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MJ.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\TAENMR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\WINGDNG2.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENS721LI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMFMMUEX.TTC', 'C:\\\\WINDOWS\\\\Fonts\\\\segoescb.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENMUHB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LCALLIG.TTF', 'C:\\\\Windows\\\\Fonts\\\\ITCKRIST.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YINJ05.TTF', 'C:\\\\Windows\\\\Fonts\\\\PER_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\Art.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\FREESCPT.TTF', 'C:\\\\Windows\\\\Fonts\\\\YINP05.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMM.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2PORM.TTF', 'C:\\\\Windows\\\\Fonts\\\\BRLNSR.TTF', 'C:\\\\Windows\\\\Fonts\\\\ERASMD.TTF', 'C:\\\\Windows\\\\Fonts\\\\SCHLBKBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\himalaya.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\msyhbd.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\VINERITC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCSCHI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOTHIC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2MKPB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PENHL.TTF', 'C:\\\\Windows\\\\Fonts\\\\taile.ttf', 'C:\\\\Windows\\\\Fonts\\\\palabi.ttf', 'C:\\\\Windows\\\\Fonts\\\\HMFMOLD.TTF', 'C:\\\\Windows\\\\Fonts\\\\arial.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_CBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\corbel.ttf', 'C:\\\\Windows\\\\Fonts\\\\POORICH.TTF', 'C:\\\\Windows\\\\Fonts\\\\arialbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\MM.TTF', 'C:\\\\Windows\\\\Fonts\\\\ELEPHNT.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANYheadL.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYGTRE.TTF', 'C:\\\\Windows\\\\Fonts\\\\HDOTUM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOUDOSB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRAHV.TTF', 'C:\\\\Windows\\\\Fonts\\\\cambriaz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ARIALNBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PERTILI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MH.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\SitkaB.ttc', 'C:\\\\Windows\\\\Fonts\\\\FRADMCN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\arialbi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\arialbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\FRAMDCN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_B.TTF', 'C:\\\\Windows\\\\Fonts\\\\YBLA05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LTYPE.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANSolB.ttf', 'C:\\\\Windows\\\\Fonts\\\\Candarali.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\H2GTRE.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\mmrtextb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\comici.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YDWM05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\timesi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\georgiai.ttf', 'C:\\\\Windows\\\\Fonts\\\\trebucbi.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENFREEHD.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENBODBKI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ROCKEB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoepr.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\YINP05.TTF', 'C:\\\\Windows\\\\Fonts\\\\UNI_HSR.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYNAMM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\verdanai.ttf', 'C:\\\\Windows\\\\Fonts\\\\consolai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\seguisbi.ttf', 'C:\\\\Windows\\\\Fonts\\\\GOUDYSTO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANBaekM.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBERNF.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\palab.ttf', 'C:\\\\Windows\\\\Fonts\\\\PERBI___.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguiemj.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBODB.TTF', 'C:\\\\Windows\\\\Fonts\\\\TAENMR.TTF', 'C:\\\\Windows\\\\Fonts\\\\calibril.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CALIFI.TTF', 'C:\\\\Windows\\\\Fonts\\\\YMAE07.TTF', 'C:\\\\Windows\\\\Fonts\\\\TCCB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CALIST.TTF', 'C:\\\\Windows\\\\Fonts\\\\COPRGTL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\holomdl2.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBLBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\Candaraz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCOBKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2MJSM.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANYGO240.ttf', 'C:\\\\Windows\\\\Fonts\\\\micross.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENFUTUBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\HBATANG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\consolab.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_CR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYSNRL.TTF', 'C:\\\\Windows\\\\Fonts\\\\ANTQUABI.TTF', 'C:\\\\Windows\\\\Fonts\\\\LFAXD.TTF', 'C:\\\\Windows\\\\Fonts\\\\msjh.ttc', 'C:\\\\Windows\\\\Fonts\\\\HMKMP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ebrimabd.ttf', 'C:\\\\Windows\\\\Fonts\\\\HMKMAMI.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoeuiz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBERNF.TTF', 'C:\\\\Windows\\\\Fonts\\\\corbelz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBODBKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\H2HDRM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\REFSAN.TTF', 'C:\\\\Windows\\\\Fonts\\\\BERNHC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYGSRB.TTF', 'C:\\\\Windows\\\\Fonts\\\\PERB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NIAGSOL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YGBI08.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_BLAR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRSCRIPT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LFAXI.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKBP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PAPYRUS.TTF', 'C:\\\\Windows\\\\Fonts\\\\MG.TTF', 'C:\\\\Windows\\\\Fonts\\\\FRABK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYGTRE.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NanumGothicExtraBold.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LFAXDI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YBMG05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\courbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\LeelUIsl.ttf', 'C:\\\\Windows\\\\Fonts\\\\MISTRAL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\calibri.ttf', 'C:\\\\Windows\\\\Fonts\\\\BOD_B.TTF', 'C:\\\\Windows\\\\Fonts\\\\LBRITED.TTF', 'C:\\\\Windows\\\\Fonts\\\\NanumGothicExtraBold.ttf', 'C:\\\\Windows\\\\Fonts\\\\segoeuil.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\times.ttf', 'C:\\\\Windows\\\\Fonts\\\\cambriai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\H2SA1M.TTF', 'C:\\\\Windows\\\\Fonts\\\\simsun.ttc', 'C:\\\\Windows\\\\Fonts\\\\ariblk.ttf', 'C:\\\\Windows\\\\Fonts\\\\PENHL.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoeuii.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCR10BI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\AGENCYB.TTF', 'C:\\\\Windows\\\\Fonts\\\\Sol.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LBRITEI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYheadB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\cambriaz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HYDNKM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\comicbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\LEELAWDB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PERBI___.TTF', 'C:\\\\Windows\\\\Fonts\\\\comic.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HANDotum.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\simsun.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\georgiab.ttf', 'C:\\\\Windows\\\\Fonts\\\\FREESCPT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\palai.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENGARM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENMUHB.TTF', 'C:\\\\Windows\\\\Fonts\\\\wingding.ttf', 'C:\\\\Windows\\\\Fonts\\\\AGENCYB.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARIALN.TTF', 'C:\\\\Windows\\\\Fonts\\\\YCHM08.TTF', 'C:\\\\Windows\\\\Fonts\\\\YBLO05.TTF', 'C:\\\\Windows\\\\Fonts\\\\MSUIGHUB.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYBSRB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\batang.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\seguibli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCCB___.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MOD20.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\taileb.ttf', 'C:\\\\Windows\\\\Fonts\\\\symbol.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ERASLGHT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCKI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7f.TTF', 'C:\\\\Windows\\\\Fonts\\\\webdings.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRLNSR.TTF', 'C:\\\\Windows\\\\Fonts\\\\msjhbd.ttc', 'C:\\\\Windows\\\\Fonts\\\\msjhl.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\courbi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\phagspa.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Candaraz.ttf', 'C:\\\\Windows\\\\Fonts\\\\FRADMIT.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGDOSBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\georgiai.ttf', 'C:\\\\Windows\\\\Fonts\\\\ERASLGHT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\l_10646.ttf', 'C:\\\\Windows\\\\Fonts\\\\GLSNECB.TTF', 'C:\\\\Windows\\\\Fonts\\\\msyhbd.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\HYGPRM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENFREEHD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANBatang.ttf', 'C:\\\\Windows\\\\Fonts\\\\HMKMA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\symbol.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYPORM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YCHM08.TTF', 'C:\\\\Windows\\\\Fonts\\\\tahoma.ttf', 'C:\\\\Windows\\\\Fonts\\\\PERI____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YuGothR.ttc', 'C:\\\\Windows\\\\Fonts\\\\consolab.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\PALSCRI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguihis.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\WINGDNG3.TTF', 'C:\\\\Windows\\\\Fonts\\\\PALSCRI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HDOTUM.TTF', 'C:\\\\Windows\\\\Fonts\\\\ebrimabd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\taile.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSaleB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CENSCBK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBODB.TTF', 'C:\\\\Windows\\\\Fonts\\\\mmrtext.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\TCBI____.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKLA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\couri.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\calibril.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ERASDEMI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANCooljazzL.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCKEB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMM.TTF', 'C:\\\\Windows\\\\Fonts\\\\GOTHICBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\YDWM05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\msgothic.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\PLAYBILL.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_R.TTF', 'C:\\\\Windows\\\\Fonts\\\\YWDA05.TTF', 'C:\\\\Windows\\\\Fonts\\\\HATTEN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\UNI_HSR.TTF', 'C:\\\\Windows\\\\Fonts\\\\ROCKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YuGothL.ttc', 'C:\\\\Windows\\\\Fonts\\\\ENCOSCPT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYCYSM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FORTE.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_CR.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKLP.TTF', 'C:\\\\Windows\\\\Fonts\\\\ROCC____.TTF', 'C:\\\\Windows\\\\Fonts\\\\Along.ttf', 'C:\\\\Windows\\\\Fonts\\\\impact.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOOKOSBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MAGNETOB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CALIFB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PERB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\consola.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENORBITB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRAMDCN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LTYPEO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ANTQUABI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYSANB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYKANM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYSUPB.TTF', 'C:\\\\Windows\\\\Fonts\\\\INFROMAN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCOSCPT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRADHITC.TTF', 'C:\\\\Windows\\\\Fonts\\\\MT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\TCCM____.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKLS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYBDAL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\PARCHM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguiemj.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\CENTURY.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRLNSB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ROCC____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\COOPBL.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYCYSM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\trebucit.ttf', 'C:\\\\Windows\\\\Fonts\\\\BAUHS93.TTF', 'C:\\\\Windows\\\\Fonts\\\\seguisli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MISTRAL.TTF', 'C:\\\\Windows\\\\Fonts\\\\LFAX.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYDNKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\segoeuii.ttf', 'C:\\\\Windows\\\\Fonts\\\\cambriab.ttf', 'C:\\\\Windows\\\\Fonts\\\\ALGER.TTF', 'C:\\\\Windows\\\\Fonts\\\\SitkaZ.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBLBK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMFMPYUN.TTF', 'C:\\\\Windows\\\\Fonts\\\\HARLOWSI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\TCCEB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\timesbi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKBP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\FRADMCN.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANDotumB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKBS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANCooljazzB.ttf', 'C:\\\\Windows\\\\Fonts\\\\GOUDOSI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\pala.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENOCRA.TTF', 'C:\\\\Windows\\\\Fonts\\\\georgiab.ttf', 'C:\\\\Windows\\\\Fonts\\\\BOOKOSBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\IMPRISHA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYNAMB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYWULM.TTF', 'C:\\\\Windows\\\\Fonts\\\\corbeli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_BI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguili.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ITCKRIST.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYSANB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENBRODWY.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENPKAV.TTF', 'C:\\\\Windows\\\\Fonts\\\\verdanai.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ARIALN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\COPRGTL.TTF', 'C:\\\\Windows\\\\Fonts\\\\LTYPEB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\SNAP____.TTF', 'C:\\\\Windows\\\\Fonts\\\\courbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\LEELAWAD.TTF', 'C:\\\\Windows\\\\Fonts\\\\KUNSTLER.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LEELAWDB.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_I.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENORAT10.TTF', 'C:\\\\Windows\\\\Fonts\\\\verdanaz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\calibrili.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYGPRM.TTF', 'C:\\\\Windows\\\\Fonts\\\\GILC____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ONYX.TTF', 'C:\\\\Windows\\\\Fonts\\\\COOPBL.TTF', 'C:\\\\Windows\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7f.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYGSRB.TTF', 'C:\\\\Windows\\\\Fonts\\\\corbell.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\Nirmala.ttf', 'C:\\\\Windows\\\\Fonts\\\\couri.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\COLONNA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYNAML.TTF', 'C:\\\\Windows\\\\Fonts\\\\BRLNSB.TTF', 'C:\\\\Windows\\\\Fonts\\\\sylfaen.ttf', 'C:\\\\Windows\\\\Fonts\\\\YSOS07.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOTHICBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\VLADIMIR.TTF', 'C:\\\\Windows\\\\Fonts\\\\AGENCYR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKLP.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YSOS07.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Inkfree.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\FTLTLT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ARIALUNI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_PSTC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\palabi.ttf', 'C:\\\\Windows\\\\Fonts\\\\YBMG05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\corbelz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\FRABKIT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\framdit.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ITCBLKAD.TTF', 'C:\\\\Windows\\\\Fonts\\\\BOD_BLAR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ARIALNI.TTF', 'C:\\\\Windows\\\\Fonts\\\\GIGI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ntailub.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANBatangB.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBRUSH.TTF', 'C:\\\\Windows\\\\Fonts\\\\calibrii.ttf', 'C:\\\\Windows\\\\Fonts\\\\CALISTB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGARMBI.TTF', 'C:\\\\Windows\\\\Fonts\\\\consolaz.ttf', 'C:\\\\Windows\\\\Fonts\\\\LHANDW.TTF', 'C:\\\\Windows\\\\Fonts\\\\BRUSHSCI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENBRODWY.TTF', 'C:\\\\Windows\\\\Fonts\\\\FRAHV.TTF', 'C:\\\\Windows\\\\Fonts\\\\BELL.TTF', 'C:\\\\Windows\\\\Fonts\\\\LCALLIG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YDUG05.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BASKVILL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\JUICE___.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKLA.TTF', 'C:\\\\Windows\\\\Fonts\\\\HTOWERTI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARIALUNI.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANBatangExt.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MB.TTF', 'C:\\\\Windows\\\\Fonts\\\\times.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENORAT10.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILSANUB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CALIFR.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\tahomabd.ttf', 'C:\\\\Windows\\\\Fonts\\\\MB.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2HDRM.TTF', 'C:\\\\Windows\\\\Fonts\\\\OCRAEXT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCR10BI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ANTQUAI.TTF', 'C:\\\\Windows\\\\Fonts\\\\LFAXI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\verdanaz.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOOKOSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\TEMPSITC.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\CALISTB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\wingding.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENSTEN.TTF', 'C:\\\\Windows\\\\Fonts\\\\YBUU02.TTF', 'C:\\\\Windows\\\\Fonts\\\\cambria.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\OCRAEXT.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENGARMB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MT.TTF', 'C:\\\\Windows\\\\Fonts\\\\ANTQUAI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\calibriz.ttf', 'C:\\\\Windows\\\\Fonts\\\\COPRGTB.TTF', 'C:\\\\Windows\\\\Fonts\\\\YuGothM.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\GOUDOSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\ELEPHNTI.TTF', 'C:\\\\Windows\\\\Fonts\\\\YDOO08.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\comicz.ttf', 'C:\\\\Windows\\\\Fonts\\\\NGULIM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\KUNSTLER.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\gadugi.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7fEXTRABOLD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENCR10B.TTF', 'C:\\\\Windows\\\\Fonts\\\\TCBI____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\cambria.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\H2GTRM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LTYPEB.TTF', 'C:\\\\Windows\\\\Fonts\\\\MAGNETOB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\cour.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\phagspab.ttf', 'C:\\\\Windows\\\\Fonts\\\\FRAHVIT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANBaekB.ttf', 'C:\\\\Windows\\\\Fonts\\\\framd.ttf', 'C:\\\\Windows\\\\Fonts\\\\verdana.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\comic.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\timesbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\seguisli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ERASBD.TTF', 'C:\\\\Windows\\\\Fonts\\\\GLECB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\NanumGothic.ttf', 'C:\\\\Windows\\\\Fonts\\\\LBRITEI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGDOSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMRHD.TTF', 'C:\\\\Windows\\\\Fonts\\\\FTLTLT.TTF', 'C:\\\\Windows\\\\Fonts\\\\ANTQUAB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSomaM.ttf', 'C:\\\\Windows\\\\Fonts\\\\CALIFB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ENSW721L.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\calibrib.ttf', 'C:\\\\Windows\\\\Fonts\\\\constanb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKLS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\MG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\corbeli.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\SitkaZ.ttc', 'C:\\\\Windows\\\\Fonts\\\\HARNGTON.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENCR10B.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYBSRB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOOKOS.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HMKMMAG.TTF', 'C:\\\\Windows\\\\Fonts\\\\phagspa.ttf', 'C:\\\\Windows\\\\Fonts\\\\BOD_BLAI.TTF', 'C:\\\\Windows\\\\Fonts\\\\corbelli.ttf', 'C:\\\\Windows\\\\Fonts\\\\holomdl2.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYSNRL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANSomaB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\MN.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GILLUBCD.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoesc.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENGDOSBI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\simsunb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\PERTIBD.TTF', 'C:\\\\Windows\\\\Fonts\\\\ARLRDBD.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\seguibl.ttf', 'C:\\\\Windows\\\\Fonts\\\\taileb.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANYGO230.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\corbel.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HARLOWSI.TTF', 'C:\\\\Windows\\\\Fonts\\\\YTTE08.TTF', 'C:\\\\Windows\\\\Fonts\\\\H2GPRM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HYBDAM.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMS.TTF', 'C:\\\\Windows\\\\Fonts\\\\MTCORSVA.TTF', 'C:\\\\Windows\\\\Fonts\\\\MK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\YWDA05.TTF', 'C:\\\\Windows\\\\Fonts\\\\segoeprb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\HBATANG.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GOUDYSTO.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\TEMPSITC.TTF', 'C:\\\\Windows\\\\Fonts\\\\BKANT.TTF', 'C:\\\\Windows\\\\Fonts\\\\ROCK.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\trebucbd.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCOBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\mmrtextb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\trebuc.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\GLECB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BRLNSDB.TTF', 'C:\\\\Windows\\\\Fonts\\\\ahn_l.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\TCM_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\SHOWG.TTF', 'C:\\\\Windows\\\\Fonts\\\\malgunsl.ttf', 'C:\\\\Windows\\\\Fonts\\\\HYSUPM.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_BLAI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\lucon.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANYGO250.ttf', 'C:\\\\Windows\\\\Fonts\\\\Candarai.ttf', 'C:\\\\Windows\\\\Fonts\\\\trebucbd.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\malgunsl.ttf', 'C:\\\\Windows\\\\Fonts\\\\LSANSD.TTF', 'C:\\\\Windows\\\\Fonts\\\\FRABKIT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\TCCB____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\LeelUIsl.ttf', 'C:\\\\Windows\\\\Fonts\\\\H2PORL.TTF', 'C:\\\\Windows\\\\Fonts\\\\Nirmala.ttf', 'C:\\\\Windows\\\\Fonts\\\\LEELAWAD.TTF', 'C:\\\\Windows\\\\Fonts\\\\SCHLBKB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\ariblk.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\msjhl.ttc', 'C:\\\\Windows\\\\Fonts\\\\BRITANIC.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYMJRE.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANYheadB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ENFUTUBK.TTF', 'C:\\\\Windows\\\\Fonts\\\\HYWULB.TTF', 'C:\\\\Windows\\\\Fonts\\\\l_10646.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENBASKVL.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANYheadL.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BELLB.TTF', 'C:\\\\Windows\\\\Fonts\\\\YuGothR.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\BKANT.TTF', 'C:\\\\Windows\\\\Fonts\\\\HANCooljazzB.ttf', 'C:\\\\Windows\\\\Fonts\\\\TCM_____.TTF', 'C:\\\\Windows\\\\Fonts\\\\NanumGothicBold.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\arial.ttf', 'C:\\\\Windows\\\\Fonts\\\\FRSCRIPT.TTF', 'C:\\\\Windows\\\\Fonts\\\\BELLB.TTF', 'C:\\\\Windows\\\\Fonts\\\\CALIFI.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\Easop.ttf', 'C:\\\\Windows\\\\Fonts\\\\timesi.ttf', 'C:\\\\Windows\\\\Fonts\\\\GARABD.TTF', 'C:\\\\Windows\\\\Fonts\\\\HMKMG.TTF', 'C:\\\\Windows\\\\Fonts\\\\phagspab.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\BOD_CB.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\HANBatangB.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\SitkaI.ttc', 'C:\\\\WINDOWS\\\\Fonts\\\\TCMI____.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\GARAIT.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\micross.ttf', 'C:\\\\Windows\\\\Fonts\\\\palab.ttf', 'C:\\\\Windows\\\\Fonts\\\\LeelaUIb.ttf', 'C:\\\\WINDOWS\\\\Fonts\\\\ntailu.ttf', 'C:\\\\Windows\\\\Fonts\\\\georgiaz.ttf', 'C:\\\\Windows\\\\Fonts\\\\HANSaleB.ttf', 'C:\\\\Windows\\\\Fonts\\\\comici.ttf', 'C:\\\\Windows\\\\Fonts\\\\ENCSCH.TTF', 'C:\\\\Windows\\\\Fonts\\\\ENOCRA.TTF', 'C:\\\\WINDOWS\\\\Fonts\\\\\\x7f\\x7f\\x7f\\x7fBOLD.TTF']\n",
+      "['NanumGothic']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import matplotlib.font_manager as fm\n",
+    "\n",
+    "plt.rc('font', family='NanumGothic')\n",
+    "print(plt.rcParams['font.family'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 105,
+   "id": "a1adefd0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 1008x360 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "sr_one = df_seoul.loc['경기도']\n",
+    "plt.figure(figsize=(14,5))\n",
+    "plt.plot(sr_one.index, sr_one.values)\n",
+    "\n",
+    "plt.title('서울 -> 경기도 이동 수')  #차트 제목\n",
+    "plt.xlabel('기간')                  #x축 이름\n",
+    "plt.ylabel('이동 이동수')           #y축 이름\n",
+    "#x 축 눈금 label 회전하기\n",
+    "plt.xticks(rotation='50')\n",
+    "\n",
+    "#법레 \n",
+    "\n",
+    "plt.legend(labels=['서울 -> 경기'], loc='best') \n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 97,
+   "id": "f2cabb75",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(array([0. , 0.2, 0.4, 0.6, 0.8, 1. ]),\n",
+       " [Text(0, 0, ''),\n",
+       "  Text(0, 0, ''),\n",
+       "  Text(0, 0, ''),\n",
+       "  Text(0, 0, ''),\n",
+       "  Text(0, 0, ''),\n",
+       "  Text(0, 0, '')])"
+      ]
+     },
+     "execution_count": 97,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  },
+  "varInspector": {
+   "cols": {
+    "lenName": 16,
+    "lenType": 16,
+    "lenVar": 40
+   },
+   "kernels_config": {
+    "python": {
+     "delete_cmd_postfix": "",
+     "delete_cmd_prefix": "del ",
+     "library": "var_list.py",
+     "varRefreshCmd": "print(var_dic_list())"
+    },
+    "r": {
+     "delete_cmd_postfix": ") ",
+     "delete_cmd_prefix": "rm(",
+     "library": "var_list.r",
+     "varRefreshCmd": "cat(var_dic_list()) "
+    }
+   },
+   "types_to_exclude": [
+    "module",
+    "function",
+    "builtin_function_or_method",
+    "instance",
+    "_Feature"
+   ],
+   "window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
+
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
+  schedule:
+    - cron: '42 18 * * 0'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [  ]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
+
+        # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+        # queries: security-extended,security-and-quality
+
+
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
+    # If this step fails, then you should remove it and run the build manually (see below)
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+
+    #   If the Autobuild fails above, remove it and uncomment the following three lines.
+    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+
+    # - run: |
+    #   echo "Run, Build Application using script"
+    #   ./location_of_script_within_repo/buildscript.sh
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
